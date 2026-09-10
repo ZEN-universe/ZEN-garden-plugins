@@ -51,7 +51,8 @@ dev = [
     "pandas-stubs",
     "types-geopandas",
     "types-docutils",
-    "scipy-stubs"
+    "scipy-stubs",
+    "pre-commit",
 ]
 
 [tool.pytest.ini_options]
