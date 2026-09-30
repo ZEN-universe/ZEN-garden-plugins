@@ -39,7 +39,7 @@ in ``pyproject.toml``:
 
     [project.entry-points."zen_garden.plugins"]
     plugin_template = "zen_garden_plugins.plugin_template.plugin"
-    my_awesome_plugin = "zen_garden_plugins.my_awesome_plugin"
+    my_awesome_plugin = "zen_garden_plugins.my_awesome_plugin.plugin"
 
 The entry point name (``my_awesome_plugin``) is what users write in the ZEN garden
 ``config.yaml``.
@@ -133,7 +133,11 @@ Install the plugin package into the same Python environment as ZEN-garden:
 The ``-e`` flag installs it in *editable* mode, which means changes to your files
 take effect immediately without reinstalling.
 
-Activate your plugin in their ``config.yaml`` file of ZEN-garden:
+.. warning::
+    If you change the pyproject.toml or add new dependencies, you must reinstall
+    the plugin.
+
+Activate your plugin in the ``config.yaml`` file of ZEN-garden:
 
 .. code-block:: yaml
 
