@@ -1,5 +1,7 @@
 import os
 
+import numpy as np
+import pandas as pd
 from zen_garden import Results, run
 
 from tests.end_to_end.utils.test_helpers import (
@@ -35,3 +37,27 @@ def test_1a(fixtures_path, capsys):
         assert "[Plugin Template] Plugin loaded successfully!" in output
     finally:
         os.chdir(cwd)
+
+
+def test_plugin_template_add_new_constraint(fixtures_path):
+    """Test that the node-indexed variable equals the input parameter."""
+    data_set_name = "test_1a"
+    run(
+        config=os.path.join(
+            fixtures_path, "config_plugin_template_add_new_constraint.yaml"
+        ),
+        dataset=os.path.join(fixtures_path, data_set_name),
+    )
+
+    results = Results(os.path.join(fixtures_path, "outputs", data_set_name))
+    new_variable = results.get_unprocessed_result("new_variable")
+    parameter_input = pd.read_csv(
+        os.path.join(
+            fixtures_path, data_set_name, "energy_system", "new_parameter.csv"
+        ),
+        index_col="node",
+    )["new_parameter"]
+
+    assert new_variable.index.name == "node"
+    assert set(new_variable.index) == set(parameter_input.index)
+    assert np.allclose(new_variable.sort_index(), parameter_input.sort_index())

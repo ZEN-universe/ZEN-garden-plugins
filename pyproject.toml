@@ -23,6 +23,7 @@ dependencies = [
 
 [project.entry-points."zen_garden.plugins"]
 plugin_template = "zen_garden_plugins.plugin_template.plugin"
+plugin_template_add_new_constraint = "zen_garden_plugins.plugin_template_add_new_constraint.plugin"
 
 [project.optional-dependencies]
 
