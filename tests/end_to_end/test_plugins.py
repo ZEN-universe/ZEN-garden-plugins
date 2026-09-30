@@ -29,6 +29,9 @@ def test_1a(fixtures_path, capsys):
             data_set_name, res, fixtures_path, "test_variables.yaml"
         )
 
-        assert "config setting 'any_setting': set_value" in capsys.readouterr().out
+        output = capsys.readouterr().out
+        assert "[Plugin Template] Example setting: set_value" in output
+        assert "[Plugin Template] Example number: 42" in output
+        assert "[Plugin Template] Plugin loaded successfully!" in output
     finally:
         os.chdir(cwd)

@@ -46,11 +46,12 @@ def _load_plugin_with_fake_events(monkeypatch):
 
 
 def test_plugin_exposes_config_schema_with_default(monkeypatch):
-    """Test the plugin config schema and its default value."""
+    """Test the plugin config schema and its default values."""
     module, _event, _calls = _load_plugin_with_fake_events(monkeypatch)
 
     assert issubclass(module.Config, ConfigBase)
-    assert module.Config().any_setting == "value_of_any_setting"
+    assert module.Config().example_setting == "default_value"
+    assert module.Config().example_number == 100
 
 
 def test_plugin_registers_handler_for_test_event1(monkeypatch):
@@ -60,7 +61,7 @@ def test_plugin_registers_handler_for_test_event1(monkeypatch):
     assert len(calls) == 1
     registered_event, registered_function = calls[0]
     assert registered_event is event.after_model_schema_creation
-    assert registered_function is module.function_to_be_called_at_test_event1
+    assert registered_function is module.extend_model
 
 
 def test_plugin_handler_reads_config_from_model_schema(monkeypatch, capsys):
@@ -68,10 +69,18 @@ def test_plugin_handler_reads_config_from_model_schema(monkeypatch, capsys):
     module, _event, _calls = _load_plugin_with_fake_events(monkeypatch)
     model_schema = SimpleNamespace(
         config=SimpleNamespace(
-            plugins={"plugin_template": {"any_setting": "configured_value"}}
+            plugins={
+                "plugin_template": {
+                    "example_setting": "configured_value",
+                    "example_number": 42,
+                }
+            }
         )
     )
 
-    module.function_to_be_called_at_test_event1(model_schema)
+    module.extend_model(model_schema)
 
-    assert "config setting 'any_setting': configured_value" in capsys.readouterr().out
+    output = capsys.readouterr().out
+    assert "[Plugin Template] Example setting: configured_value" in output
+    assert "[Plugin Template] Example number: 42" in output
+    assert "[Plugin Template] Plugin loaded successfully!" in output

@@ -3,4 +3,5 @@ solver:
   save_duals: true
 plugins:
   plugin_template:
-    any_setting: set_value
+    example_setting: set_value
+    example_number: 42
