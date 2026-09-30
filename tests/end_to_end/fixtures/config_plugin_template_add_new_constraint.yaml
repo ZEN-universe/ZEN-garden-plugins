@@ -1,0 +1,5 @@
+solver:
+  keep_files: false
+plugins:
+  plugin_template_add_new_constraint:
+    include_constraint: true

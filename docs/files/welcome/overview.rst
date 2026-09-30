@@ -16,3 +16,4 @@ for an introduction to the plugin system and a tutorial on how to implement your
 The following plugins are available:
 
 - :doc:`../available_plugins/template_plugin/template_plugin`
+- :doc:`../available_plugins/plugin_template_add_new_constraint/plugin_template_add_new_constraint`
