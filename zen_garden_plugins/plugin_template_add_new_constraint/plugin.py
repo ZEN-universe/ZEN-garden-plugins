@@ -8,6 +8,7 @@ optimization model is constructed.
 
 from pydantic import Field
 from zen_garden import ConfigBase, Event, EventPublisher, ModelSchema
+from zen_garden.elements.energy_system import EnergySystem
 
 from zen_garden_plugins.plugin_template_add_new_constraint.constraints import (
     NewConstraint,
@@ -55,6 +56,11 @@ def add_new_constraint_components(model_schema: ModelSchema) -> None:
     config = model_schema.config.plugins["plugin_template_add_new_constraint"]
     if config["include_constraint"]:
         energy_system = model_schema.element_type_classes["EnergySystem"]
+        if not issubclass(energy_system, EnergySystem):
+            raise TypeError(
+                "Expected the 'EnergySystem' schema entry to contain an "
+                "EnergySystem subclass"
+            )
         energy_system.own_parameters.append(NewParameter)
         energy_system.parameters.append(NewParameter)
         energy_system.variables.append(NewVariable)
