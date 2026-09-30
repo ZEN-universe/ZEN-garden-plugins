@@ -17,7 +17,7 @@ authors = [
   { name="Jacob Mannhardt"},
 ]
 dependencies = [
-    "zen_garden"
+    "zen_garden>=3.1.1"
 ]
 
 
