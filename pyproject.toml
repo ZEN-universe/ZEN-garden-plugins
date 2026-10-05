@@ -45,7 +45,7 @@ dev = [
     "pytest-cov",
     "black==26.5.1",
     "ruff==0.16.5",
-    "mypy==2.3.1",
+    "mypy>=2.4.0",
     "types-PyYAML",
     "pandas-stubs",
     "types-geopandas",
