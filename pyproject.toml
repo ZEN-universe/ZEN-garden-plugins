@@ -28,31 +28,11 @@ plugin_template_add_new_constraint = "zen_garden_plugins.plugin_template_add_new
 [project.optional-dependencies]
 
 docs = [
-    "sphinx==7.3.7",
-    "myst-parser==3.0.1",
-    "sphinx-book-theme==1.1.3",
-    "pydata-sphinx-theme==0.15.4",
-    "sphinx-reredirects==0.1.4",
-    "nbsphinx==0.9.4",
-    "nbsphinx-link==1.3.0",
-    "sphinxcontrib-mermaid",
-    "furo"
+    "zen_garden[docs]>=3.3.1",
 ]
 
 dev = [
-    "pytest",
-    "coverage",
-    "pytest-xdist",
-    "pytest-cov",
-    "black==26.5.1",
-    "ruff==0.16.5",
-    "mypy==2.4.0",
-    "types-PyYAML",
-    "pandas-stubs",
-    "types-geopandas",
-    "types-docutils",
-    "scipy-stubs",
-    "pre-commit",
+    "zen_garden[dev]>=3.3.1",
 ]
 
 [tool.pytest.ini_options]
